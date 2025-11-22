@@ -1,0 +1,376 @@
+/* =============== RESET =============== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text",
+    "Segoe UI", sans-serif;
+}
+
+body {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 24px;
+  transition: background 0.3s ease;
+}
+
+/* THEME COLORS (LIGHT / DARK) */
+body.theme-dark {
+  background: radial-gradient(circle at top, #1f2937, #020617);
+  color: #f9fafb;
+}
+
+body.theme-light {
+  background: radial-gradient(circle at top, #e5e7eb, #cbd5f5);
+  color: #020617;
+}
+
+/* WRAPPER */
+.wrapper {
+  width: 100%;
+  max-width: 420px;
+}
+
+/* GLASS CARD / CALCULATOR BASE */
+.glass-card {
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.45);
+}
+
+.calculator {
+  border-radius: 26px;
+  padding: 16px 16px 20px;
+  background: rgba(15, 23, 42, 0.9);
+  transition: background 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+/* Light mode card */
+body.theme-light .calculator {
+  background: rgba(248, 250, 252, 0.96);
+  box-shadow: 0 18px 40px rgba(15, 23, 42, 0.25);
+}
+
+/* TOP BAR */
+.top-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.title {
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+.top-right {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+/* THEME TOGGLE BUTTON */
+.theme-toggle {
+  border: none;
+  border-radius: 999px;
+  padding: 6px 10px;
+  font-size: 0.9rem;
+  background: #020617;
+  color: #f9fafb;
+  cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.3s ease,
+    color 0.3s ease;
+  box-shadow: 0 4px 10px rgba(15, 23, 42, 0.6);
+}
+
+body.theme-light .theme-toggle {
+  background: #e5e7eb;
+  color: #020617;
+  box-shadow: 0 4px 10px rgba(148, 163, 184, 0.6);
+}
+
+.theme-toggle:active {
+  transform: scale(0.95);
+}
+
+/* HISTORY BUTTON */
+.history-btn {
+  border: none;
+  padding: 6px 12px;
+  border-radius: 999px;
+  background: #4f46e5;
+  color: #f9fafb;
+  font-size: 0.8rem;
+  cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.3s ease;
+  box-shadow: 0 4px 10px rgba(15, 23, 42, 0.7);
+}
+
+.history-btn:active {
+  transform: scale(0.96);
+}
+
+body.theme-light .history-btn {
+  background: #4338ca;
+}
+
+/* DISPLAY */
+.display {
+  padding: 12px 10px;
+  border-radius: 18px;
+  background: linear-gradient(145deg, #020617, #020617);
+  border: 1px solid rgba(148, 163, 184, 0.4);
+  margin-bottom: 12px;
+  box-shadow: inset 0 0 10px rgba(15, 23, 42, 0.8);
+  transition: background 0.3s ease, border-color 0.3s ease;
+}
+
+body.theme-light .display {
+  background: linear-gradient(145deg, #e5e7eb, #f9fafb);
+  border-color: rgba(148, 163, 184, 0.7);
+  box-shadow: inset 0 0 6px rgba(148, 163, 184, 0.4);
+}
+
+.calc-history {
+  font-size: 0.86rem;
+  color: #9ca3af;
+  text-align: right;
+  min-height: 16px;
+}
+
+body.theme-light .calc-history {
+  color: #6b7280;
+}
+
+.calc-result {
+  width: 100%;
+  background: transparent;
+  border: none;
+  outline: none;
+  text-align: right;
+  font-size: 2.2rem;
+  color: #f9fafb;
+  margin-top: 4px;
+}
+
+body.theme-light .calc-result {
+  color: #020617;
+}
+
+/* ANGLE CONTROLS */
+.top-controls {
+  display: flex;
+  justify-content: flex-start;
+  margin-bottom: 10px;
+}
+
+.angle-controls {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  font-size: 0.8rem;
+  color: #9ca3af;
+}
+
+body.theme-light .angle-controls {
+  color: #4b5563;
+}
+
+.mode-btn {
+  border-radius: 999px;
+  border: 1px solid rgba(148, 163, 184, 0.5);
+  padding: 4px 10px;
+  font-size: 0.7rem;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease,
+    transform 0.1s ease;
+}
+
+.mode-btn.active {
+  background: #4f46e5;
+  color: #f9fafb;
+  border-color: #4f46e5;
+}
+
+body.theme-light .mode-btn.active {
+  background: #4338ca;
+}
+
+/* BUTTON GRID */
+.buttons {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 8px;
+}
+
+/* BUTTONS – iOS STYLE */
+.btn {
+  border: none;
+  border-radius: 999px;
+  padding: 14px 0;
+  font-size: 1.05rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: transform 0.08s ease, box-shadow 0.08s ease, background 0.25s ease,
+    color 0.25s ease;
+  box-shadow: 0 6px 12px rgba(15, 23, 42, 0.7);
+  background: radial-gradient(circle at top, #111827, #020617);
+  color: #e5e7eb;
+}
+
+.btn:active {
+  transform: translateY(2px) scale(0.98);
+  box-shadow: 0 2px 6px rgba(15, 23, 42, 0.7);
+}
+
+body.theme-light .btn {
+  background: radial-gradient(circle at top, #f3f4f6, #e5e7eb);
+  color: #111827;
+  box-shadow: 0 6px 12px rgba(148, 163, 184, 0.8);
+}
+
+/* FUNCTION & OPERATOR COLORS */
+.btn-op {
+  background: radial-gradient(circle at top, #1e293b, #020617);
+  color: #93c5fd;
+}
+
+body.theme-light .btn-op {
+  background: radial-gradient(circle at top, #e0f2fe, #bfdbfe);
+  color: #1e3a8a;
+}
+
+.btn-func {
+  background: radial-gradient(circle at top, #020617, #020617);
+  color: #a5b4fc;
+}
+
+body.theme-light .btn-func {
+  background: radial-gradient(circle at top, #eef2ff, #e0e7ff);
+  color: #4338ca;
+}
+
+/* EQUAL BUTTON */
+.btn-equal {
+  background: radial-gradient(circle at top, #f97316, #ea580c);
+  color: #fff;
+  box-shadow: 0 6px 14px rgba(248, 113, 113, 0.8);
+}
+
+.btn-equal:active {
+  box-shadow: 0 3px 7px rgba(248, 113, 113, 0.8);
+}
+
+/* WIDE BUTTON */
+.btn-wide {
+  grid-column: span 2;
+}
+
+/* HISTORY PANEL */
+.history-panel {
+  position: fixed;
+  top: 0;
+  right: -340px;
+  width: 300px;
+  height: 100vh;
+  background: rgba(15, 23, 42, 0.98);
+  color: #f9fafb;
+  padding: 18px;
+  transition: right 0.3s ease;
+  box-shadow: -12px 0 30px rgba(0, 0, 0, 0.7);
+  z-index: 10;
+}
+
+body.theme-light .history-panel {
+  background: rgba(248, 250, 252, 0.98);
+  color: #020617;
+}
+
+.history-panel.active {
+  right: 0;
+}
+
+.history-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 6px;
+}
+
+.history-back-btn,
+.clear-history-btn {
+  border-radius: 999px;
+  border: none;
+  padding: 5px 12px;
+  font-size: 0.8rem;
+  cursor: pointer;
+  transition: transform 0.1s ease, background 0.2s ease;
+}
+
+.history-back-btn {
+  background: #111827;
+  color: #f9fafb;
+}
+
+body.theme-light .history-back-btn {
+  background: #e5e7eb;
+  color: #020617;
+}
+
+.clear-history-btn {
+  background: #dc2626;
+  color: #f9fafb;
+}
+
+.history-back-btn:active,
+.clear-history-btn:active {
+  transform: scale(0.96);
+}
+
+.history-list {
+  margin-top: 18px;
+}
+
+.history-item {
+  background: #020617;
+  border-radius: 12px;
+  padding: 10px;
+  margin-bottom: 10px;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.1s ease;
+}
+
+body.theme-light .history-item {
+  background: #e5e7eb;
+}
+
+.history-item:hover {
+  transform: translateY(-1px);
+  background: #111827;
+}
+
+body.theme-light .history-item:hover {
+  background: #d1d5db;
+}
+
+/* RESPONSIVE */
+@media (max-width: 480px) {
+  .calculator {
+    padding: 14px;
+    border-radius: 22px;
+  }
+
+  .calc-result {
+    font-size: 1.8rem;
+  }
+
+  .btn {
+    padding: 12px 0;
+    font-size: 1rem;
+  }
+}
